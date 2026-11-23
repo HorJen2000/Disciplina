@@ -80,6 +80,11 @@ Erro:
 { "sucesso": false, "mensagem": "Já existe uma disciplina com a sigla DAW." }
 ```
 
+<img width="1919" height="990" alt="image" src="https://github.com/user-attachments/assets/8a850ea6-6773-44f4-847d-bc6a0d95643e" />
+
+<img width="1919" height="989" alt="image" src="https://github.com/user-attachments/assets/8631612c-f85a-4fd4-8692-8103710fe47d" />
+
+
 ## Autor
 
 Henrique Oliveira — Análise e Desenvolvimento de Sistemas, FAETERJ-Rio
