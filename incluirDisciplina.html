@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inclusão de disciplina</title>
+    <script>
+        function incluirDisciplina(evento) {
+            evento.preventDefault();
+
+            let formulario = document.getElementById("formDisciplina");
+
+            let xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    let msg = document.getElementById("msg");
+                    if (this.status == 200) {
+                        console.log("Resposta do PHP: " + this.responseText);
+                        let resposta = JSON.parse(this.responseText);
+                        if (resposta.sucesso) {
+                            msg.textContent = resposta.mensagem + " (" + resposta.disciplina.sigla + " - " +
+                                              resposta.disciplina.nome + ", " + resposta.disciplina.carga_horaria + "h)";
+                            msg.style.color = "green";
+                            formulario.reset();
+                        } else {
+                            msg.textContent = resposta.mensagem;
+                            msg.style.color = "red";
+                        }
+                    } else {
+                        msg.textContent = "Requisição falhou: " + this.status;
+                        msg.style.color = "red";
+                    }
+                }
+            };
+
+            xmlhttp.open("POST", "IncluirDisciplina.php");
+            xmlhttp.send(new FormData(formulario));
+        }
+    </script>
+</head>
+<body>
+    <h1>Inclusão de Disciplina</h1>
+
+    <form id="formDisciplina" onsubmit="incluirDisciplina(event)">
+        Sigla:
+        <input type="text" name="sigla" maxlength="10" required><br>
+
+        Nome:
+        <input type="text" name="nome" maxlength="100" required><br>
+
+        Carga horária:
+        <input type="number" name="carga_horaria" min="1" step="1" required><br><br>
+
+        <input type="submit" value="Incluir Disciplina">
+    </form>
+
+    <p id="msg"></p>
+</body>
+</html>
